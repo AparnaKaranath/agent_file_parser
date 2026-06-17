@@ -9,6 +9,7 @@ class AgentState(TypedDict):
     documents: List[dict]
     blob_names: List[str]
     index_created: bool
+    index_status: str
     documents_uploaded: int
     upload_status: str
     error: Optional[str]

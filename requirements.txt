@@ -1,3 +1,10 @@
 python-dotenv
-azure.storage.blob
+azure-storage-blob
+azure-search-documents
+azure-core
 langgraph
+azure-identity
+pandas
+pyPDF2
+python-docx
+streamlit

@@ -1,5 +1,6 @@
 import os
 import glob
+import hashlib
 import json
 from pathlib import Path
 from datetime import datetime
@@ -45,8 +46,9 @@ class FileReaderNode:
 
             for chunk_index, chunk in enumerate(self._chunk_text(content), start=1):
                 if chunk.strip():
+                    chunk_hash = hashlib.sha256(f"{file_name}:{chunk_index}:{chunk}".encode("utf-8")).hexdigest()[:16]
                     json_records.append({
-                        "id": f"doc{file_index}_{chunk_index}",
+                        "id": f"doc{file_index}_{chunk_hash}",
                         "content": chunk,
                         "file_name": file_name
                     })
@@ -56,8 +58,8 @@ class FileReaderNode:
 
         connection_string = os.environ.get("STR_BLOB_CONNECTION_STRING")
         container_name = os.environ.get("STR_BLOB_CONTAINER_NAME")
-        print("connection string###",connection_string)
-        print("connection string###",container_name)
+        print("Storage connection string:", "***" if connection_string else "Not Set")
+        print("Storage container name:", container_name)
         if connection_string and container_name and json_records:
             print(
                 "Uploading extracted JSON to blob storage..., ",

@@ -26,7 +26,9 @@ def main():
     index_state = {
         "documents": [],
         "blob_names": [],
+        "uploaded_blob_url": result.get("uploaded_blob_url", ""),
         "index_created": False,
+        "index_status": "",
         "documents_uploaded": 0,
         "upload_status": ""
     }
